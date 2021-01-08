@@ -1,0 +1,21 @@
+trainingInput:
+  args:
+  - remy-demos
+  - nvidiadask
+  - --train-files /rapids/dataset/higgs/ 
+  - --scheduler-ip-file /rapids/dataset/tmp/cudf1fuse.txt
+  - --num-workers=2
+  masterConfig:
+    acceleratorConfig:
+      count: '1'
+      type: NVIDIA_TESLA_T4
+    imageUri: gcr.io/k80-exploration/gcp_rapids_dist:rabit
+  masterType: n1-highmem-8
+  scaleTier: CUSTOM
+  workerConfig:
+    acceleratorConfig:
+      count: '1'
+      type: NVIDIA_TESLA_T4
+    imageUri: gcr.io/k80-exploration/gcp_rapids_dist:rabit
+  workerCount: '1'
+  workerType: n1-highmem-4

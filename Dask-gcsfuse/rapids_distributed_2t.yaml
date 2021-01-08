@@ -1,0 +1,25 @@
+trainingInput:
+  args:
+  - dlvm-dataset
+  - rapids
+  - --train-files /rapids/dataset/higgs/ 
+  - --scheduler-ip-file /rapids/dataset/tmp/2Tfuse.txt 
+  - --model-file /rapids/dataset/models/2Tfuse.model 
+  - --num-workers=96
+  masterConfig:
+    acceleratorConfig:
+      count: '1'
+      type: NVIDIA_TESLA_T4
+    imageUri: gcr.io/k80-exploration/gcp_rapids_dist:fuse
+    diskConfig:
+      bootDiskSizeGb: 500
+      bootDiskType: pd-ssd
+  masterType: n1-highmem-8
+  scaleTier: CUSTOM
+  workerConfig:
+    acceleratorConfig:
+      count: '1'
+      type: NVIDIA_TESLA_T4
+    imageUri: gcr.io/k80-exploration/gcp_rapids_dist:fuse
+  workerCount: '95'
+  workerType: n1-highmem-4
