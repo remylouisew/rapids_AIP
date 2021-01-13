@@ -1,3 +1,0 @@
-cudf>=0.7*
-dask>=1.2.2
-distributed>=1.26

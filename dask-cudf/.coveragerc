@@ -1,5 +1,0 @@
-# Configuration file for Python coverage tests
-[run]
-include = dask_cudf/*
-omit = dask_cudf/tests/*
-
