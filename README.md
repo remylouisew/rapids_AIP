@@ -1,4 +1,6 @@
 
+## Scale model training from 10 GB to 640 GB training in minutes with RAPIDS + Dask and GPUs on AI Platform
+
 This repository contains a tutorial for using Dask on GCP's AI Platform. It accompanies this blog post.
 
 
