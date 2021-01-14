@@ -1,15 +1,16 @@
 trainingInput:
   args:
   - --gcp-project=remy-demos
-  - --train-files=gs://nvidiadask/higgs2/*.csv 
+  - --train-files=gs://nvidiadask/higgs100/*.csv 
   - --model-file=gs://nvidiadask/models/1t.model
   - --num-gpu-per-worker=1
   - --threads-per-worker=1
   - --do-wait
   masterConfig:
     acceleratorConfig:
-      count: '1'
-      type: NVIDIA_TESLA_T4
-    imageUri: gcr.io/remy-demos/rapidsai_base:latest
-  masterType: n1-highmem-8
+      count: '4' 
+      type: NVIDIA_TESLA_A100
+    imageUri: gcr.io/remy-demos/rapidsai_base:latest #Change this to your GCR path if you built your own container
+  masterType: a2-highgpu-2g
   scaleTier: CUSTOM
+
