@@ -1,0 +1,15 @@
+trainingInput:
+  args:
+  - --gcp-project=remy-demos
+  - --train-files=gs://nvidiadask/higgs1/*.csv 
+  - --model-file=gs://nvidiadask/models/1t.model
+  - --num-gpu-per-worker=1
+  - --threads-per-worker=1
+  - --do-wait
+  masterConfig:
+    acceleratorConfig:
+      count: '2' 
+      type: NVIDIA_TESLA_T4
+    imageUri: gcr.io/gpu-test-project/rapids_gcsfs:latest #Change this to your GCR path if you built your own container
+  masterType: n1-highmem-8
+  scaleTier: CUSTOM
