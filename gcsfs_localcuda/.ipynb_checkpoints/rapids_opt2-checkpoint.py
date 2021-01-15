@@ -81,7 +81,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--gcp-project', type=str, help='user gcp project',
-        default='crisp-sa')
+        default='na')
     parser.add_argument(
         '--train-files', type=str, help='Training files local or GCS',
         default='gs://crisp-sa/rapids/higgs_csv/*.csv')
@@ -90,7 +90,7 @@ if __name__ == '__main__':
         help="""GCS or local dir for checkpoints, exports, and summaries.
         Use an existing directory to load a trained model, or a new directory
         to retrain""",
-        default='gs://crisp-sa/rapids/models/001.model')
+        default='na')
     parser.add_argument(
         '--num-gpu-per-worker', type=int, help='num of workers',
         default=2)
@@ -112,18 +112,16 @@ if __name__ == '__main__':
     sched_ip, sched_uri = get_scheduler_info()
     
 
-    print("[INFO]: ------ LocalCUDACluster is being formed with device memory limit 13gb")
+    print("[INFO]: ------ LocalCUDACluster is being formedx")
     # `LocalCUDACluster` is used for assigning GPU to XGBoost processes.  Here
     # `n_workers` represents the number of GPUs since we use one GPU per worker
     # process.
     with LocalCUDACluster(ip=sched_ip, 
                           n_workers=args.num_gpu_per_worker, 
-                          threads_per_worker=args.threads_per_worker, 
-                          rmm_pool_size=parse_bytes("13GB"),
-                          device_memory_limit=parse_bytes("13GB")) as cluster:
+                          threads_per_worker=args.threads_per_worker 
+                          ) as cluster:
     #with LocalCUDACluster(n_workers=args.num_gpu_per_worker, threads_per_worker=args.threads_per_worker) as cluster:
         with Client(cluster) as client:
-            # generate some random data for demonstration
 
             print('[INFO]: ------ Calling main function ')
             using_quantile_device_dmatrix(client, args.train_files, args.model_file, fs, args.do_wait)

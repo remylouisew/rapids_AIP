@@ -10,7 +10,7 @@ trainingInput:
     acceleratorConfig:
       count: '4' 
       type: NVIDIA_TESLA_A100
-    imageUri: gcr.io/remy-demos/rapidsai_base:latest #Change this to your GCR path if you built your own container
-  masterType: a2-highgpu-2g
+    imageUri: gcr.io/remy-demos/rapids_gcsfs:latest #Change this to your GCR path if you built your own container
+  masterType: a2-highgpu-4g
   scaleTier: CUSTOM
 
