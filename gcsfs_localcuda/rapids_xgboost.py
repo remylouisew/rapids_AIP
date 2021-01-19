@@ -32,7 +32,7 @@ def using_quantile_device_dmatrix(client: Client, train_dir, model_file, fs, do_
         X = X.persist()
         wait(df)
         wait(X)
-        print("[INFO]: ------ Long waited but the data is ready now")
+        print("[INFO]: ------ Data is ready now")
     
 
     # `DaskDeviceQuantileDMatrix` is used instead of `DaskDMatrix`, be careful
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     sched_ip, sched_uri = get_scheduler_info()
     
 
-    print("[INFO]: ------ LocalCUDACluster is being formedx")
+    print("[INFO]: ------ LocalCUDACluster is being formed4")
     # `LocalCUDACluster` is used for assigning GPU to XGBoost processes.  Here
     # `n_workers` represents the number of GPUs since we use one GPU per worker
     # process.
@@ -126,12 +126,3 @@ if __name__ == '__main__':
             print('[INFO]: ------ Calling main function ')
             using_quantile_device_dmatrix(client, args.train_files, args.model_file, fs, args.do_wait)
    
-'''         
-    with LocalCUDACluster(ip=sched_ip, n_workers=args.num_gpu_per_worker, threads_per_worker=args.threads_per_worker, device_memory_limit=parse_bytes("13GB")) as cluster:
-    #with LocalCUDACluster(n_workers=args.num_gpu_per_worker, threads_per_worker=args.threads_per_worker) as cluster:
-        with Client(cluster) as client:
-            # generate some random data for demonstration
-
-            print('[INFO]: ------ Calling main function')
-            using_quantile_device_dmatrix(client, args.train_files, args.model_file, fs, args.do_wait)
-'''

@@ -13,3 +13,5 @@ trainingInput:
     imageUri: gcr.io/gpu-test-project/rapids_gcsfs:latest #Change this to your GCR path if you built your own container
   masterType: n1-highmem-8
   scaleTier: CUSTOM
+
+#example of running the same XGBoost code with a 10 GB dataset and two T4's
