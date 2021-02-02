@@ -1,4 +1,5 @@
 ## Submit AI Platform Training job using custom container
+## First, you must update build.sh, rapids_distributed.yaml
 
 #bash build.sh
 

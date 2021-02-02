@@ -1,17 +1,17 @@
 trainingInput:
   args:
   - --gcp-project=remy-demos
-  - --train-files=gs://nvidiadask/higgs100/*.csv #100 GB 
-  - --model-file=gs://nvidiadask/models/1t.model
-  - --num-gpu-per-worker=2
+  - --train-files=gs://rwtmp_demo_ml/nvidiadask/folder/*/*.csv #100 GB of data
+  - --model-file=gs://nvidiadask/models/1t.model #Change to your GCS Bucket
+  - --num-gpu-per-worker=1
   - --threads-per-worker=1
-  #- --do-wait=False
+  - --do-wait
   masterConfig:
     acceleratorConfig:
-      count: '2' 
+      count: '4' 
       type: NVIDIA_TESLA_A100
     imageUri: gcr.io/remy-sandbox/rapids_gcsfs:latest #Change this to your GCR path 
-  masterType: a2-highgpu-2g
+  masterType: a2-highgpu-4g
   scaleTier: CUSTOM
 
 #XGboost training job using 4 A100 GPUs
