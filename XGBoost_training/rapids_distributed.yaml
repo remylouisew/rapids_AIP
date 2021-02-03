@@ -1,15 +1,13 @@
 trainingInput:
   args:
-  - remy-demos
-  - nvidiadask
-  - --train-files /rapids/dataset/higgs/ 
-  - --scheduler-ip-file /rapids/dataset/tmp/scheduler1fuse.txt 
-  - --model-file /rapids/dataset/models/001fuse.model 
+  - --gcp-project=[PROJECT_NAME]
+  - --train-files=gs://[GCS_BUCKET]/abcdefgh*/*.csv #30 GB 
+  - --model-file=gs://[GCS_BUCKET]/models/1t.model
   masterConfig:
     acceleratorConfig:
       count: '1'
       type: NVIDIA_TESLA_T4
-    imageUri: gcr.io/k80-exploration/gcp_rapids_dist:fuse
+    imageUri: gcr.io/[PROJECT_NAME]/[IMAGE]:[VERSION]
     diskConfig:
       bootDiskSizeGb: 500
       bootDiskType: pd-ssd
@@ -19,6 +17,8 @@ trainingInput:
     acceleratorConfig:
       count: '1'
       type: NVIDIA_TESLA_T4
-    imageUri: gcr.io/k80-exploration/gcp_rapids_dist:fuse
+    imageUri: gcr.io/[PROJECT_NAME]/[IMAGE]:[VERSION]
   workerCount: '4'
   workerType: n1-highmem-4
+
+# Distributed processing config...not officially supported

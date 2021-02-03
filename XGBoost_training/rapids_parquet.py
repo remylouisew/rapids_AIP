@@ -14,6 +14,9 @@ import os, json
 import subprocess
 from dask.utils import parse_bytes
 
+# Parquet files are read faster. Only change in this script is dask_cudf.read_parquet instead of read_csv.
+# Keep in mind you will need to convert your files to parquet, potentially using daskDataFrame.to_parquet()
+
 def using_quantile_device_dmatrix(client: Client, train_dir, model_file, fs, do_wait=False):
     '''`DaskDeviceQuantileDMatrix` is a data type specialized for `gpu_hist`, tree
      method that reduces memory overhead.  When training on GPU pipeline, it's
@@ -118,8 +121,8 @@ if __name__ == '__main__':
     # `n_workers` represents the number of GPUs since we use one GPU per worker
     # process.
     with LocalCUDACluster(ip=sched_ip, 
-                         # n_workers=args.num_gpu_per_worker, 
-                         # threads_per_worker=args.threads_per_worker 
+                          n_workers=args.num_gpu_per_worker, 
+                          threads_per_worker=args.threads_per_worker 
                           ) as cluster:
     #with LocalCUDACluster(n_workers=args.num_gpu_per_worker, threads_per_worker=args.threads_per_worker) as cluster:
         with Client(cluster) as client:

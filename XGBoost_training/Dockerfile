@@ -1,4 +1,3 @@
-#FROM mengdong/test-rapids:latest
 FROM rapidsai/rapidsai:cuda11.0-runtime-ubuntu18.04-py3.8 
 
 RUN . /opt/conda/etc/profile.d/conda.sh \
