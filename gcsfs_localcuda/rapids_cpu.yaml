@@ -3,14 +3,16 @@
   - --gcp-project=remy-demos
   - --train-files=gs://nvidiadask/higgs100/*.csv #100 GB 
   - --model-file=gs://nvidiadask/models/1t.model
-  - --num-gpu-per-worker=1
-  - --threads-per-worker=1
+ # - --num-gpu-per-worker=1
+ # - --threads-per-worker=1
   - --do-wait
   masterConfig:
     imageUri: gcr.io/remy-sandbox/rapids_gcsfs:latest #Change this to your GCR path if you built your own container
-  masterType: n1-highmem-16
+  masterType: n1-highmem-32
   workerConfig:
     imageUri: gcr.io/remy-sandbox/rapids_gcsfs:latest #Change this to your GCR path if you built your own container
-  workerCount: '12'
-  workerType: n1-highmem-16
+  workerCount: '1'
+  workerType: n1-highmem-32
   scaleTier: CUSTOM
+  
+ #TODO: make this work 

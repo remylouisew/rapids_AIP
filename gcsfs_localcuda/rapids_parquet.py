@@ -5,7 +5,7 @@ from dask import array as da
 import xgboost as xgb
 from xgboost import dask as dxgb
 from xgboost.dask import DaskDMatrix
-import cupy as cp
+#import cupy as cp
 import argparse
 import time
 import gcsfs
@@ -25,7 +25,7 @@ def using_quantile_device_dmatrix(client: Client, train_dir, model_file, fs, do_
     df = dask_cudf.read_parquet(train_dir, header=None, names=colnames, chunksize=None)
     X = df[df.columns.difference(['label'])]
     y = df['label']
-    print("[INFO]: ------ Parquet files are read from" + train_dir + "in".format((time.time() - start_time)))
+    print("[INFO]: ------ Parquet files are read from" + train_dir + "in {}".format((time.time() - start_time)))
    
 
     if do_wait is True:
@@ -113,13 +113,13 @@ if __name__ == '__main__':
     sched_ip, sched_uri = get_scheduler_info()
     
 
-    print("[INFO]: ------ LocalCUDACluster is being formed4")
+    print("[INFO]: ------ LocalCUDACluster is being formed - no args, cpu")
     # `LocalCUDACluster` is used for assigning GPU to XGBoost processes.  Here
     # `n_workers` represents the number of GPUs since we use one GPU per worker
     # process.
     with LocalCUDACluster(ip=sched_ip, 
-                          n_workers=args.num_gpu_per_worker, 
-                          threads_per_worker=args.threads_per_worker 
+                         # n_workers=args.num_gpu_per_worker, 
+                         # threads_per_worker=args.threads_per_worker 
                           ) as cluster:
     #with LocalCUDACluster(n_workers=args.num_gpu_per_worker, threads_per_worker=args.threads_per_worker) as cluster:
         with Client(cluster) as client:
