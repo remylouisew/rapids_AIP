@@ -1,0 +1,10 @@
+
+
+wget http://rapidsai-data.s3-website.us-east-2.amazonaws.com/notebook-mortgage-data/mortgage_2000-2007_1gb.tgz
+
+mkdir mortgage
+tar -zxvf mortgage_2000-2007_1gb.tgz /mortgage/
+
+gsutil cp -m /mortgage/* gs://rwtmp_demo_ml/mortgage/
+
+rm /mortgage
