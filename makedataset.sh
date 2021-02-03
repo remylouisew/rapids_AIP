@@ -25,7 +25,7 @@ len=1470000
 step_size=$(( (num_lines-len) / num_chunks))
 
  
-# Replicate the original dataset into 10 1GB chunks
+## Replicate the original dataset into 10 1GB chunks
 for i in `seq 1 ${num_chunks}`;
 
 do
