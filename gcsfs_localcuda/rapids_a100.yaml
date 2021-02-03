@@ -3,15 +3,16 @@ trainingInput:
   - --gcp-project=remy-demos
   - --train-files=gs://rwtmp_demo_ml/nvidiadask/folder/*/*.csv #100 GB of data
   - --model-file=gs://nvidiadask/models/1t.model #Change to your GCS Bucket
-  - --num-gpu-per-worker=1
+  - --num-gpu-per-worker=2 # Attaching all GPUs to a single worker so they can share memory (single node deployment)
   - --threads-per-worker=1
   - --do-wait
   masterConfig:
     acceleratorConfig:
-      count: '4' 
+      count: '2' 
       type: NVIDIA_TESLA_A100
     imageUri: gcr.io/remy-sandbox/rapids_gcsfs:latest #Change this to your GCR path 
-  masterType: a2-highgpu-4g
+  masterType: a2-highgpu-2g
   scaleTier: CUSTOM
 
-#XGboost training job using 4 A100 GPUs
+# XGboost training job using 4 A100 GPUs
+# Update bracketed fields with your paths

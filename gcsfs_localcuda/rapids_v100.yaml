@@ -3,13 +3,13 @@ trainingInput:
   - --gcp-project=remy-demos
   - --train-files=gs://rwtmp_demo_ml/nvidiadask/folder/abcde*/*.csv #60 GB 
   - --model-file=gs://nvidiadask/models/1t.model
-  - --num-gpu-per-worker=1
+  - --num-gpu-per-worker=2
   - --threads-per-worker=1
   - --do-wait
   masterConfig:
     acceleratorConfig:
-      count: '4' 
-      type: NVIDIA_TESLA_T4
+      count: '2' 
+      type: NVIDIA_TESLA_V100 
     imageUri: gcr.io/remy-sandbox/rapids_gcsfs:latest #Change this to your GCR path 
   masterType: n1-standard-32
   scaleTier: CUSTOM

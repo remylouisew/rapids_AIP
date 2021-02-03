@@ -5,7 +5,6 @@ from dask import array as da
 import xgboost as xgb
 from xgboost import dask as dxgb
 from xgboost.dask import DaskDMatrix
-import cupy as cp
 import argparse
 import time
 import gcsfs
@@ -110,8 +109,8 @@ if __name__ == '__main__':
     # `LocalCUDACluster` is used for assigning GPU to XGBoost processes.  Here
     # `n_workers` represents the number of GPUs.
     with LocalCUDACluster(ip=sched_ip,
-                         n_workers=args.num_gpu_per_worker, 
-                         threads_per_worker=args.threads_per_worker 
+                        n_workers=args.num_gpu_per_worker, 
+                        threads_per_worker=args.threads_per_worker 
                           ) as cluster:
     #with LocalCUDACluster(n_workers=args.num_gpu_per_worker, threads_per_worker=args.threads_per_worker) as cluster:
         with Client(cluster) as client:
